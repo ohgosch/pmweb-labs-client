@@ -1,8 +1,10 @@
 const gulp       = require('gulp')
 const sass       = require('gulp-sass')
+const clean      = require('gulp-clean')
 const babel      = require('gulp-babel')
 const concat     = require('gulp-concat')
 const sync       = require('browser-sync').create()
+const image      = require('gulp-imagemin')
 const sourcemaps = require('gulp-sourcemaps')
 
 // It's the structure of files
@@ -27,6 +29,7 @@ gulp.task('babel', () => {
 
 // Compile sass files
 gulp.task('sass', () => {
+
     gulp.src(structure.source + '/sass/*.sass')
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -36,7 +39,7 @@ gulp.task('sass', () => {
 })
 
 // Responsible for auto refresh browser in dev
-gulp.task('sync', ['babel', 'sass'], () => {
+gulp.task('sync', ['babel', 'sass', 'image'], () => {
 
     sync.init({
         server: {
@@ -61,10 +64,28 @@ gulp.task('sync', ['babel', 'sass'], () => {
 
     // CSS
     gulp.watch('src/sass/*.js', ['sass'])
+
+    // Image
+    gulp.watch(structure.source + '/img/**/*', ['image']).on('change', sync.reload)
+})
+
+// Clean assets folder
+gulp.task('clean', () => {
+
+    return gulp.src(structure.distribution + '/assets/')
+        .pipe(clean())
+        .pipe(sync.stream())
+})
+
+gulp.task('image', () => {
+
+    gulp.src(structure.source + '/img/**/*')
+        .pipe(image())
+        .pipe(gulp.dest(structure.distribution + '/assets/img/'))
 })
 
 // Default task
-gulp.task('default', ['babel', 'sass'])
+gulp.task('default', ['babel', 'sass', 'image'])
 
 // Sync task
 gulp.task('watch', ['sync'])

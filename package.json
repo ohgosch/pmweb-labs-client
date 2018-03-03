@@ -5,9 +5,9 @@
   "repository": "https://rgosch@github.com/rgosch/pmweb-labs-client.git",
   "author": "Ricardo Gosch <ricardogosch@gmail.com>",
   "scripts": {
-    "watch": "npx gulp watch",
-    "build": "npx gulp production",
-    "dev": "npx gulp default"
+    "watch": "npx gulp clean && npx gulp watch",
+    "build": "npx gulp clean && npx gulp production",
+    "dev": "npx gulp clean && npx gulp default"
   },
   "license": "MIT",
   "devDependencies": {
@@ -16,7 +16,9 @@
     "browser-sync": "^2.23.6",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
+    "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^4.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4"
   },
