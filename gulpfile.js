@@ -4,8 +4,10 @@ const clean      = require('gulp-clean')
 const babel      = require('gulp-babel')
 const concat     = require('gulp-concat')
 const sync       = require('browser-sync').create()
+const include    = require('gulp-include')
 const image      = require('gulp-imagemin')
 const sourcemaps = require('gulp-sourcemaps')
+const bulk       = require('gulp-sass-bulk-import')
 
 // It's the structure of files
 const structure = {
@@ -32,6 +34,7 @@ gulp.task('sass', () => {
 
     gulp.src(structure.source + '/sass/*.sass')
         .pipe(sourcemaps.init())
+        .pipe(bulk())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(structure.distribution + '/assets/css'))
@@ -63,7 +66,7 @@ gulp.task('sync', ['babel', 'sass', 'image'], () => {
     gulp.watch('src/js/**/*.js', ['babel'])
 
     // CSS
-    gulp.watch('src/sass/*.js', ['sass'])
+    gulp.watch('src/sass/**/*', ['sass'])
 
     // Image
     gulp.watch(structure.source + '/img/**/*', ['image']).on('change', sync.reload)
