@@ -28,7 +28,13 @@ let mountMetrics = (api) => {
         },
 
         xAxis: {
-            categories: categories
+            categories: categories,
+            labels: {
+                formatter: function() {
+                    var label = this.axis.defaultLabelFormatter.call(this);
+                    return Number.parseInt(label.match(/^\d{4}-\d\d?-(\d\d?)$/)[1])
+                }
+            }
         },
 
         yAxis: {
