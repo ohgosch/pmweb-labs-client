@@ -1,0 +1,44 @@
+#container
+    width: 100%
+
+    .highcharts-container
+
+        .highcharts-title
+            text-transform: uppercase
+            font-weight: 700
+            display: flex
+            align-items: center
+            flex-wrap: wrap
+
+            .date
+                color: #E0E0E0
+                font-size: 13px
+                margin-left: 10px
+
+        // Remove triangles, dots, squares etc.
+        .highcharts-point
+            display: none
+
+        .highcharts-tooltip
+
+            // Tooltip box
+            .highcharts-label-box
+                stroke: gray
+                fill: white
+
+            .tip-content
+
+                .row
+                    display: flex
+
+                    .col
+
+                        &.date
+                            margin-right: 7px
+                            display: flex
+                            align-items: center
+
+                            &:before
+                                content: '●'
+                                display: block
+                                margin-right: 3px

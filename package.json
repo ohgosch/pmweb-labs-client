@@ -1,6 +1,6 @@
 {
   "name": "pmweb-labs-client",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "index.js",
   "repository": "https://rgosch@github.com/rgosch/pmweb-labs-client.git",
   "author": "Ricardo Gosch <ricardogosch@gmail.com>",
