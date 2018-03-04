@@ -6,7 +6,7 @@
   "author": "Ricardo Gosch <ricardogosch@gmail.com>",
   "scripts": {
     "watch": "npx gulp clean && npx gulp watch",
-    "build": "npx gulp clean && npx gulp production",
+    "build": "npx gulp clean && npx gulp default && npx gulp minify",
     "dev": "npx gulp clean && npx gulp default"
   },
   "license": "MIT",
@@ -20,6 +20,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^4.1.0",
     "gulp-include": "^2.3.1",
+    "gulp-minifier": "^1.2.1",
     "gulp-sass": "^3.1.0",
     "gulp-sass-bulk-import": "^1.0.1",
     "gulp-sourcemaps": "^2.6.4"

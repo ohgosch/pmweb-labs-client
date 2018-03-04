@@ -6,6 +6,7 @@ const concat     = require('gulp-concat')
 const sync       = require('browser-sync').create()
 const include    = require('gulp-include')
 const image      = require('gulp-imagemin')
+const minify     = require('gulp-minifier')
 const sourcemaps = require('gulp-sourcemaps')
 const bulk       = require('gulp-sass-bulk-import')
 
@@ -87,11 +88,21 @@ gulp.task('image', () => {
         .pipe(gulp.dest(structure.distribution + '/assets/img/'))
 })
 
+gulp.task('minify', () => {
+
+    gulp.src(structure.distribution + '/assets/**/*')
+        .pipe(minify({
+            minify: true,
+            minifyJS: {
+                sourceMap: false
+            },
+            minifyCSS: true,
+        }))
+        .pipe(gulp.dest(structure.distribution + '/assets'))
+})
+
 // Default task
 gulp.task('default', ['babel', 'sass', 'image'])
 
 // Sync task
 gulp.task('watch', ['sync'])
-
-// Production task
-gulp.task('production', ['default'])
